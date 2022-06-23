@@ -9,7 +9,7 @@ exports.up = function (knex) {
             table.string('name', 255).notNullable();
             table.text('description', 255).notNullable();
             table.smallint('room_qty', 12).nullable();
-            table.bigint('fk_address_id', 255).notNullable();
+            table.bigint('fk_address_id', 255).nullable();
             table.string('phone', 12).notNullable();
             table.dateTime('createdAt').defaultTo(knex.fn.now());
             table.dateTime('updatedAt').defaultTo(knex.fn.now());
