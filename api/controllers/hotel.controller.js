@@ -34,10 +34,10 @@ module.exports = {
             })
         }
     },
-    getById: {
+    getById: (req, res) => {
 
     },
-    getAll: {
+    getAll: (req, res) => {
 
     }
 }
