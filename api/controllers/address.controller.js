@@ -59,7 +59,13 @@ module.exports = {
             })
         }
     },
-    getAll: {
+    getAll: async (req, res) => {
+        console.log('here in get all addreses');
+        await AddressService.getAll().then(result => {
+            res.status(200).json(result)
+        }).catch(err => {
+            res.status(500).json(err)
+        })
 
     }
 }
