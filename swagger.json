@@ -21,11 +21,12 @@
       "description": "Authentication API's"
     }
   ],
-
   "paths": {
     "/auth/register": {
       "post": {
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "summary": "Register a new user",
         "requestBody": {
           "required": true,
@@ -53,7 +54,9 @@
     },
     "/auth/login": {
       "post": {
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "summary": "Login a user",
         "requestBody": {
           "required": true,
@@ -73,6 +76,85 @@
                 "schema": {
                   "type": "object",
                   "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hotel/create": {
+      "post": {
+        "tags": [
+          "Hotel"
+        ],
+        "summary": "Create a new hotel",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HotelCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HotelCreateResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hotel/getAll": {
+      "post": {
+        "tags": [
+          "Hotel"
+        ],
+        "summary": "Get all Hotels",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllHotelResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hotel/get/": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "tags": [
+          "Hotel"
+        ],
+        "summary": "Get Hotel by Id",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HotelGetByIdResponse"
                 }
               }
             }
@@ -117,7 +199,13 @@
             "default": "8780498282"
           }
         },
-        "required": ["first_name", "last_name", "email", "password", "phone"]
+        "required": [
+          "first_name",
+          "last_name",
+          "email",
+          "password",
+          "phone"
+        ]
       },
       "LoginRequest": {
         "type": "object",
@@ -135,7 +223,89 @@
             "default": "test@123"
           }
         },
-        "required": ["email", "password"]
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "HotelCreateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 20,
+            "default": "Taj Hotel"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 200,
+            "default": "The Great Taj Hotel at S.P ring road Ahmedabad"
+          },
+          "room_qty": {
+            "type": "number",
+            "minLength": 0,
+            "maxLength": 4,
+            "default": "50"
+          },
+          "phone": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 12,
+            "default": "8780498282"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "room_qty",
+          "phone"
+        ]
+      },
+      "HotelCreateResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "default": "Hotel created successfully"
+          }
+        }
+      },
+      "HotelGetByIdRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 9,
+            "default": "1"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "HotelGetByIdResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+              "id": 2,
+              "name": "The Grand Marriot",
+              "description": "Iconic Marriot hotel at satellite Ahmedabad",
+              "room_qty": 2000
+            }
+        }
+      },
+      "GetAllHotelResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "default": "Hotel created successfully"
+          },
+          "data": {}
+        }
       },
       "RegisterResponse": {
         "type": "object",
@@ -165,7 +335,13 @@
             "type": "string"
           }
         },
-        "required": ["token", "id", "first_name", "last_name", "email"]
+        "required": [
+          "token",
+          "id",
+          "first_name",
+          "last_name",
+          "email"
+        ]
       }
     }
   }
