@@ -9,12 +9,12 @@ exports.up = function(knex) {
         table.string('name', 255).notNullable();
         table.text('description', 255).notNullable();
         table.text('fk_amenities_ids').nullable();
-        table.string('duration', 15).notNullable();
+        table.string('duration', 50).notNullable();
         table.string('difficulty', 30).notNullable();
         table.string('age_group', 20).notNullable();
         table.bigint('max_altitude', 12).notNullable();
-        table.bigint('createdBy', 12).nullable();
-        table.bigint('updatedBy', 12).nullable();
+        table.bigint('createdBy', 12).defaultTo(knex.fn.now());
+        table.bigint('updatedBy', 12).defaultTo(knex.fn.now());
         table.dateTime('deletedAt').nullable();
     })
 };
